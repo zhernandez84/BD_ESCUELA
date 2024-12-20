@@ -3,13 +3,16 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-12-2024 a las 00:55:46
+-- Tiempo de generación: 20-12-2024 a las 03:30:15
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+
 
 DELIMITER $$
 --
@@ -43,6 +46,14 @@ SELECT `nIdAlumno`, `nEstatus`,
  `sIdAlumno`, `sNombre`, `sPaterno`, `sMaterno`, `dFecNacimiento`, `sGenero` 
 FROM `dat_alumno`;
 
+END$$
+
+CREATE  PROCEDURE `sp_get_grados` ()   BEGIN
+	SELECT `nIdGrado`, `sGrado` FROM `cat_grado`;
+END$$
+
+CREATE  PROCEDURE `sp_get_materias` ()   BEGIN
+	SELECT `nIdMateria`, `sMateria` FROM `cat_materia`;
 END$$
 
 CREATE  PROCEDURE `sp_insert_alumno` (IN `p_sIdAlumno` VARCHAR(100), IN `p_sNombre` VARCHAR(150), IN `p_sPaterno` VARCHAR(100), IN `p_sMaterno` VARCHAR(100), IN `p_dFecNacimiento` DATE, IN `p_sGenero` CHAR(1))   BEGIN
@@ -224,7 +235,9 @@ CREATE TABLE `dat_alumno` (
 
 INSERT INTO `dat_alumno` (`nIdAlumno`, `nEstatus`, `sIdAlumno`, `sNombre`, `sPaterno`, `sMaterno`, `dFecNacimiento`, `sGenero`, `dFecRegistro`, `dFecMovimiento`) VALUES
 (1, 3, 'HEOZ930625MOCRRR01', 'ZURISADDAI MERARI', 'HERNANDEZ', 'ORDAZ', '1993-06-25', 'F', '2024-12-14 03:19:50', '2024-12-17 05:47:02'),
-(4, 1, 'N12188515', 'HUGO', 'HERNANDEZ', 'ORDAZ', '1996-08-04', 'M', '2024-12-16 16:20:22', '2024-12-17 01:12:07');
+(4, 1, 'N12188515', 'HUGO', 'HERNANDEZ', 'ORDAZ', '1996-08-04', 'M', '2024-12-16 16:20:22', '2024-12-17 01:12:07'),
+(24, 1, 'AA00E249HX', 'KARLA DANIELA', 'ORTIZ', 'MATINEZ', '1996-07-04', 'F', '2024-12-19 17:12:09', '2024-12-19 23:12:09'),
+(25, 1, 'ANT202412', 'ALEXANDRE', 'JNFRANCOIS', '', '1993-03-18', 'M', '2024-12-19 20:04:20', '2024-12-20 02:04:20');
 
 -- --------------------------------------------------------
 
@@ -252,7 +265,11 @@ INSERT INTO `dat_calificaciones` (`nIdCalificacion`, `nIdAlumno`, `nIdMateria`, 
 (2, 1, 1, 9.3, 1, 12, '2024', '2024-12-16 22:28:59', '2024-12-17 04:28:59'),
 (7, 4, 3, 8.5, 1, 11, '2024', '2024-12-16 22:50:05', '2024-12-17 04:50:05'),
 (9, 1, 10, 8.0, 1, 12, '2024', '2024-12-17 06:42:10', '2024-12-17 05:42:31'),
-(10, 1, 7, 7.0, 2, 12, '2024', '2024-12-17 06:42:49', '2024-12-17 05:43:13');
+(10, 1, 7, 7.0, 2, 12, '2024', '2024-12-17 06:42:49', '2024-12-17 05:43:13'),
+(15, 1, 4, 8.5, 2, 12, '2024', '2024-12-19 12:52:14', '2024-12-19 18:52:14'),
+(28, 1, 2, 7.0, 2, 12, '2024', '2024-12-19 13:17:03', '2024-12-19 19:17:03'),
+(36, 24, 6, 8.4, 3, 12, '2024', '2024-12-19 19:47:30', '2024-12-20 01:47:30'),
+(37, 25, 4, 9.0, 1, 12, '2024', '2024-12-19 20:05:17', '2024-12-20 02:05:17');
 
 -- --------------------------------------------------------
 
@@ -331,13 +348,13 @@ ALTER TABLE `cat_materia`
 -- AUTO_INCREMENT de la tabla `dat_alumno`
 --
 ALTER TABLE `dat_alumno`
-  MODIFY `nIdAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `nIdAlumno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `dat_calificaciones`
 --
 ALTER TABLE `dat_calificaciones`
-  MODIFY `nIdCalificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `nIdCalificacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `dat_user`
